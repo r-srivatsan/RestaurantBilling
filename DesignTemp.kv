@@ -1,0 +1,117 @@
+#:kivy 1.10
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import TreeViewLabel kivy.uix.treeview.TreeViewLabel
+#: import utils kivy.utils 
+
+ScreenManagement:
+	LoginScreen:
+	BillScreen:
+<Button>:
+	background_normal: ''
+
+<LoginScreen>:
+	username : username
+	status: status
+	name: "main"
+	FloatLayout:
+		Label:
+			text: "Welcome! Enter your Roll Number."
+			pos_hint: {'center_x': .5, 'center_y': .7}
+			font_size: 20
+			color: utils.get_color_from_hex('#2F6CE5')
+		TextInput:
+			id: username
+			size_hint: (0.4,0.05)
+			background_normal: ''
+			pos_hint: {'center_x': .5, 'center_y': .635}
+			multiline: False
+			cursor_color: utils.get_color_from_hex('#003EFF')
+			foreground_color: utils.get_color_from_hex('#FFFFFF')
+			canvas.before:
+				Color:
+					rgba: utils.get_color_from_hex('#003EFF')
+				Line:
+					points: self.x, self.y, self.x + self.width, self.y
+					width: 1
+		Label:
+			id: status
+			text: ''
+			color: utils.get_color_from_hex('#FF2424')
+			pos_hint: {'x': 0, 'y': .1}
+			size_hint: 1, 0.1
+		Button:
+			text : "Go"
+			size_hint: 0.1,0.06
+			font_size: 16
+			color: utils.get_color_from_hex('#FFFFFF')
+			background_normal: ''
+			background_color: utils.get_color_from_hex('#2F6CE5')
+			border: (20, 20, 20, 20)
+			pos_hint: {'center_x': .5, 'center_y': .56}
+			on_release: root.ValidateUserName()
+		
+	
+			
+<BillScreen>:
+	name: "bill"
+	userrollno: userrollno
+	bill: bill
+	GridLayout:
+		cols:2
+		BoxLayout:
+			orientation: "vertical"
+			Label:
+				id: userrollno
+				text:''
+				color: utils.get_color_from_hex('#2F6CE5')
+			Label:
+				text: "List of Items"
+				color: utils.get_color_from_hex('#2F6CE5')
+			Button:
+				text: "Plain Dosa" 
+				background_color: utils.get_color_from_hex('#2F6CE5')
+				color: utils.get_color_from_hex('#FFFFFF')
+				on_press: root.AddToBill(self.text)
+			Button:
+				text: "Masala Dosa" 
+				background_color: utils.get_color_from_hex('#2F6CE5')
+				color: utils.get_color_from_hex('#FFFFFF')
+				on_press: root.AddToBill(self.text)
+			Button:
+				text: "Plain Idli" 
+				background_color: utils.get_color_from_hex('#2F6CE5')
+				color: utils.get_color_from_hex('#FFFFFF')
+				on_press: root.AddToBill(self.text)
+			Button:
+				text: "Podi Idli" 
+				background_color: utils.get_color_from_hex('#2F6CE5')
+				color: utils.get_color_from_hex('#FFFFFF')
+				on_press: root.AddToBill(self.text)
+
+		Splitter:
+			BoxLayout:
+				orientation: "vertical"
+				BoxLayout:
+					orientation: "vertical"
+					id: bill
+					Label:
+						text: "Your order is displayed here"
+						color: utils.get_color_from_hex('#2F6CE5')
+				BoxLayout:
+					orientation: "horizontal"
+					Button:
+						text : "Print"
+						font_size: 16
+						color: utils.get_color_from_hex('#FFFFFF')
+						background_normal: ''
+						background_color: utils.get_color_from_hex('#2F6CE5')
+						border: (20, 20, 20, 20)
+						on_release: root.PrintBill()
+					Button:
+						text : "Cancel"
+						font_size: 16
+						color: utils.get_color_from_hex('#FFFFFF')
+						background_normal: ''
+						background_color: utils.get_color_from_hex('#464646')
+						border: (20, 20, 20, 20)
+						on_release: root.ClearAll()

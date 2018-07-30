@@ -1,0 +1,10 @@
+{
+    "Idli":[
+        {"name":"Plain Idli", "price": 20},
+        {"name":"Podi Idli", "price": 25}
+    ],
+    "Dosa":[
+        {"name":"Plain Dosa", "price": 30},
+        {"name":"Masala Dosa", "price": 40}
+    ]
+}
